@@ -6,6 +6,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.LogEvent;
 import com.codeborne.selenide.logevents.SelenideLog;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import com.codeborne.selenide.testng.ScreenShooter;
 import com.codeborne.selenide.testng.TextReport;
 import com.google.common.io.Files;
 import com.qa.utility.ConfigReader;
@@ -26,7 +27,7 @@ import java.util.logging.Level;
 
 import static com.codeborne.selenide.Selenide.open;
 
-@Listeners({TextReport.class})
+@Listeners({TextReport.class, ScreenShooter.class})
 public class TestSetup {
 
     static ConfigReader configReader = ConfigCache.getOrCreate(ConfigReader.class);
