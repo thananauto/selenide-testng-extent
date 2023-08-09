@@ -105,7 +105,7 @@
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testNg.xml</suiteXmlFile>
+                        <suiteXmlFile>testNg-InfluxDB.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
 

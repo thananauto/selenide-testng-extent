@@ -8,5 +8,6 @@ datasources:
     type: influxdb
     access: proxy
     database: selenium_test_results
-    url: http://influxdb:8086
+    url: https://8086-port-c2ee7849253748fa.labs.kodekloud.com
+    #url: http://influxdb:8086
     isDefault: true

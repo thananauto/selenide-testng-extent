@@ -27,5 +27,7 @@ services:
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_BASIC_ENABLED=false
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+
     volumes:
       - ./src/test/resources/config/grafana-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
