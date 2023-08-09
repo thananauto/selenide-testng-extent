@@ -10,6 +10,7 @@ import com.qa.testdata.TestData;
 import com.qa.tests.base.TestSetup;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -23,6 +24,7 @@ public class AddEmployeeTest extends TestSetup {
     @Story("Login")
     @Severity(SeverityLevel.CRITICAL)
     @Test(testName = "Test the employee", description = "Add the employee and validate")
+    @Step("Add the employee and validate whether employer created successfully")
     public void testEmployee(Method method)  {
 
         Employee employee = TestData.getEmployeeData();
@@ -40,6 +42,7 @@ public class AddEmployeeTest extends TestSetup {
     @Story("Login")
     @Severity(SeverityLevel.CRITICAL)
     @Test(testName = "Test the employee2", description = "Verify the employee and validate")
+    @Step("validate the employee and the credentials")
     public void testEmployee2(Method method)  {
         //read yml in Hask key
 
@@ -58,6 +61,7 @@ public class AddEmployeeTest extends TestSetup {
     @Story("Check the invalid credentials")
     @Severity(SeverityLevel.MINOR)
     @Test(testName = "Validate the invalid", description = "Verify invalid credentials scenario")
+    @Step("Validate the invalid credentials of user")
     public void invalidCredentials(){
         LoginPage.getInstance()
                 .validateInvalidCredentials("Admin", "Admin1234");

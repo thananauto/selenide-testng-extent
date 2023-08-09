@@ -27,4 +27,10 @@ public interface ConfigReader extends Config {
 
     @Key("app.baseUrl")
     String baseUrl();
+
+    @Key("selenide.takescreenshots")
+    boolean takeScreenShots();
+
+    @Key("selenide.remoteUrl")
+    String remoteUrl();
 }

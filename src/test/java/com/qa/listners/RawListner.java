@@ -1,16 +1,19 @@
 package com.qa.listners;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.aventstack.extentreports.model.Media;
 import com.codeborne.selenide.Screenshots;
 import com.codeborne.selenide.WebDriverRunner;
 import com.google.common.io.Files;
 import com.qa.report.ExtentTestManager;
 import com.qa.tests.base.TestSetup;
 import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -63,11 +66,9 @@ public class RawListner implements ITestListener {
     public void OnTestRun(ITestResult result){
        ExtentTest extentTest = ExtentTestManager.getTest();
         if(result.getStatus()==ITestResult.FAILURE){
-            extentTest.assignCategory(result.getInstanceName());
-            extentTest.log(Status.FAIL,"Details: "+result.getMethod().getDescription());
-            extentTest.log(Status.FAIL, MarkupHelper.createLabel("FAILED test case name is:"+""+result.getName(),ExtentColor.RED));
+            extentTest.assignCategory(result.getThrowable().getClass().getSimpleName());
+            extentTest.log(Status.FAIL, getStepDetails(result));
             Reporter.log("Failed Report"+"",true);
-            extentTest.fail(result.getThrowable());
             for(int i=0;i<result.getParameters().length;i++){
                 extentTest.log(Status.FAIL,result.getParameters()[i].toString());
             }
@@ -75,13 +76,15 @@ public class RawListner implements ITestListener {
             WebDriver driver = WebDriverRunner.getWebDriver();
             //Take base64Screenshot screenshot for extent reports
            String path = getScreenshot(driver, result.getName());
-            extentTest.addScreenCaptureFromPath(path);
+           extentTest.log(Status.FAIL, result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(path).build());
         }
         else if(result.getStatus()==ITestResult.SUCCESS){
-            extentTest.log(Status.PASS,"TestClass:"+result.getClass().getName()+" : "+result.getMethod().getDescription());
+          extentTest.log(Status.PASS, getStepDetails(result));
+           //extentTest.log(Status.PASS,"TestClass:"+result.getClass().getName()+" : "+result.getMethod().getDescription());
         }
         else if(result.getStatus()==ITestResult.SKIP){
-            extentTest.log(Status.SKIP,"TestCaseSKIPPEDis"+""+result.getMethod().getDescription());
+            extentTest.log(Status.SKIP, getStepDetails(result));
+           // extentTest.log(Status.SKIP,"TestCaseSKIPPEDis"+""+result.getMethod().getDescription());
         }
     }
     @Attachment(type = "image/png")
@@ -91,6 +94,9 @@ public class RawListner implements ITestListener {
         return screenshot == null ? null : Files.toByteArray(screenshot);
     }
 
+    public String getStepDetails(ITestResult result){
+        return result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(Step.class).value();
+    }
     @SneakyThrows
     public static String getScreenshot(WebDriver driver, String screenshotName) throws Exception {
         //below line is just to append the date format with the screenshot name to avoid duplicate names
