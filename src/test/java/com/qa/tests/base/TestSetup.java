@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Screenshots;
 import com.codeborne.selenide.Selenide;
 import com.google.common.io.Files;
+import com.qa.utility.ConfigFactory;
 import com.qa.utility.ConfigReader;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
@@ -21,7 +22,7 @@ import static com.codeborne.selenide.Selenide.open;
 //@Listeners({TextReport.class})
 public class TestSetup {
 
-    static ConfigReader configReader = ConfigCache.getOrCreate(ConfigReader.class);
+    static ConfigReader configReader = ConfigFactory.configReader;
 
     @BeforeSuite
     public void setupAllureReports() {

@@ -33,4 +33,8 @@ public interface ConfigReader extends Config {
 
     @Key("selenide.remoteUrl")
     String remoteUrl();
+
+
+    @Key("influx.db.url")
+    String influxUrl();
 }

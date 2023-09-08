@@ -50,7 +50,7 @@ public class AddEmployeeTest extends TestSetup {
         LoginDetails loginDetails = TestData.getLoginData();
 
         LoginPage.getInstance()
-                .logIntoApplication("Admin", "Password")
+                .logIntoApplication("Admin", "admin123")
                 .getLeftMenuComponent()
                 .selectLeftMenu(LeftMenuComponentType.PIM)
                 .getInstanceOfPage(EmployeeInformationPage.class)
