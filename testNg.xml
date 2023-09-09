@@ -3,7 +3,7 @@
 <suite name="Practice Suite" thread-count="1" parallel="methods">
     <listeners>
         <listener class-name="com.qa.listners.RawListner"/>
-
+        <listener class-name="com.qa.listners.InfluxDBSuiteListner"/>
     </listeners>
     <test name="HRM">
         <packages>

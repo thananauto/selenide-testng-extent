@@ -1,5 +1,6 @@
 package com.qa.tests;
 
+import com.codeborne.selenide.ex.ElementNotFound;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.qa.entity.Employee;
 import com.qa.entity.LeftMenuComponentType;
@@ -17,6 +18,7 @@ import org.testng.annotations.Test;
 import com.codeborne.selenide.testng.TextReport;
 
 import java.lang.reflect.Method;
+import java.util.NoSuchElementException;
 
 
 public class AddEmployeeTest extends TestSetup {
@@ -65,5 +67,16 @@ public class AddEmployeeTest extends TestSetup {
     public void invalidCredentials(){
         LoginPage.getInstance()
                 .validateInvalidCredentials("Admin", "Admin1234");
+    }
+    @Test(description = "NUll pointer exception")
+    @Step("Validate null pointer")
+    public void nullExcep(){
+        throw new NullPointerException();
+    }
+
+    @Test(description = "NoSuchELement exception")
+    @Step("Validate element not visible")
+    public void elementNotVis(){
+        throw new NoSuchElementException();
     }
 }

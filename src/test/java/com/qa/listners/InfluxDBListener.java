@@ -43,4 +43,8 @@ public class InfluxDBListener implements ITestListener {
                 .build();
         InfluxDBManager.post(point);
     }
+
+    private void postOverallExecution(ITestContext iTestContext){
+
+    }
 }

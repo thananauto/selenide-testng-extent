@@ -32,12 +32,12 @@ services:
     volumes:
       - ./src/test/resources/config/grafana-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
 
-
+#standalone chrome browser to execute the test scripts
   chrome:
     image: selenium/standalone-chrome:110.0
     shm_size: 2gb
     networks:
-      -grafana:
+      - grafana
     ports:
       - "4444:4444"
       - "7900:7900"
